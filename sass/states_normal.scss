@@ -1,0 +1,54 @@
+.state-flag {
+    width: 150px; height: 100px;
+    background-image: url('../images/flags_normal.png');
+    &-alaska { background-position: -10px -10px; }
+    &-alabama { background-position: -180px -10px; }
+    &-arizona { background-position: -10px -130px; }
+    &-california { background-position: -180px -130px; }
+    &-arkansas { background-position: -350px -10px; }
+    &-georgia { background-position: -350px -130px; }
+    &-delaware { background-position: -10px -250px; }
+    &-iowa { background-position: -180px -250px; }
+    &-colorado { background-position: -350px -250px; }
+    &-florida { background-position: -10px -370px; }
+    &-connecticut { background-position: -180px -370px; }
+    &-hawaii { background-position: -350px -370px; }
+    &-illinois { background-position: -520px -10px; }
+    &-indiana { background-position: -520px -130px; }
+    &-louisiana { background-position: -520px -250px; }
+    &-kansas { background-position: -520px -370px; }
+    &-idaho { background-position: -10px -490px; }
+    &-massachusetts { background-position: -180px -490px; }
+    &-maryland { background-position: -350px -490px; }
+    &-maine { background-position: -520px -490px; }
+    &-michigan { background-position: -690px -10px; }
+    &-mississippi { background-position: -690px -130px; }
+    &-kentucky { background-position: -690px -250px; }
+    &-minnesota { background-position: -690px -370px; }
+    &-nebraska { background-position: -690px -490px; }
+    &-new-hampshire { background-position: -10px -610px; }
+    &-missouri { background-position: -180px -610px; }
+    &-north-carolina { background-position: -350px -610px; }
+    &-new-york { background-position: -520px -610px; }
+    &-montana { background-position: -690px -610px; }
+    &-oklahoma { background-position: -10px -730px; }
+    &-north-dakota { background-position: -180px -730px; }
+    &-new-mexico { background-position: -350px -730px; }
+    &-oregon { background-position: -520px -730px; }
+    &-new-jersey { background-position: -690px -730px; }
+    &-nevada { background-position: -860px -10px; }
+    &-ohio { background-position: -860px -130px; }
+    &-south-dakota { background-position: -860px -250px; }
+    &-tennessee { background-position: -860px -370px; }
+    &-texas { background-position: -860px -490px; }
+    &-pennsylvania { background-position: -860px -610px; }
+    &-rhode-island { background-position: -860px -730px; }
+    &-south-carolina { background-position: -10px -850px; }
+    &-vermont { background-position: -180px -850px; }
+    &-virginia { background-position: -350px -850px; }
+    &-wisconsin { background-position: -520px -850px; }
+    &-utah { background-position: -690px -850px; }
+    &-washington { background-position: -860px -850px; }
+    &-wyoming { background-position: -1030px -10px; }
+    &-west-virginia { background-position: -1030px -130px; }
+}

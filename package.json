@@ -1,0 +1,32 @@
+{
+  "name": "celulas-cfer",
+  "version": "1.0.0",
+  "description": "CFERobledo Celulas Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosueDanielBust/cfer-celulas.git"
+  },
+  "keywords": [
+    "celulas",
+    "manager",
+    "php",
+    "wordpress",
+    "cfer"
+  ],
+  "author": "JosueDanielBust",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JosueDanielBust/cfer-celulas/issues"
+  },
+  "homepage": "https://github.com/JosueDanielBust/cfer-celulas#readme",
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}

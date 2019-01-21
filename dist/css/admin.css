@@ -1,0 +1,6 @@
+.aig-metadata-groups { display: flex; flex-direction: column; padding: 0 3rem; }
+.aig-metadata-groups .aig-control-group { display: flex; margin: 0.5rem 0; }
+.aig-metadata-groups .aig-control-group label { min-width: 20%; }
+.aig-metadata-groups .aig-control-group select, .aig-metadata-groups .aig-control-group input[type="text"] { flex-grow: 1; }
+
+/*# sourceMappingURL=admin.css.map */

@@ -1,0 +1,101 @@
+.state-flag { width: 85px; height: 57px; background: url("../images/flags.png"); }
+.state-flag-alabama { background-position: -10px -10px; }
+.state-flag-alaska { background-position: -115px -10px; }
+.state-flag-california { background-position: -10px -87px; }
+.state-flag-arkansas { background-position: -115px -87px; }
+.state-flag-idaho { background-position: -220px -10px; }
+.state-flag-kansas { background-position: -220px -87px; }
+.state-flag-district-of-columbia { background-position: -10px -164px; }
+.state-flag-arizona { background-position: -115px -164px; }
+.state-flag-iowa { background-position: -220px -164px; }
+.state-flag-louisiana { background-position: -10px -241px; }
+.state-flag-florida { background-position: -115px -241px; }
+.state-flag-hawaii { background-position: -220px -241px; }
+.state-flag-indiana { background-position: -325px -10px; }
+.state-flag-connecticut { background-position: -325px -87px; }
+.state-flag-illinois { background-position: -325px -164px; }
+.state-flag-georgia { background-position: -325px -241px; }
+.state-flag-minnesota { background-position: -10px -318px; }
+.state-flag-mississippi { background-position: -115px -318px; }
+.state-flag-kentucky { background-position: -220px -318px; }
+.state-flag-nevada { background-position: -325px -318px; }
+.state-flag-new-hampshire { background-position: -430px -10px; }
+.state-flag-montana { background-position: -430px -87px; }
+.state-flag-new-jersey { background-position: -430px -164px; }
+.state-flag-north-dakota { background-position: -430px -241px; }
+.state-flag-colorado { background-position: -430px -318px; }
+.state-flag-maryland { background-position: -10px -395px; }
+.state-flag-massachusetts { background-position: -115px -395px; }
+.state-flag-michigan { background-position: -220px -395px; }
+.state-flag-oregon { background-position: -325px -395px; }
+.state-flag-nebraska { background-position: -430px -395px; }
+.state-flag-south-dakota { background-position: -535px -10px; }
+.state-flag-tennessee { background-position: -535px -87px; }
+.state-flag-missouri { background-position: -535px -164px; }
+.state-flag-new-york { background-position: -535px -241px; }
+.state-flag-north-carolina { background-position: -535px -318px; }
+.state-flag-south-carolina { background-position: -535px -395px; }
+.state-flag-pennsylvania { background-position: -10px -472px; }
+.state-flag-wisconsin { background-position: -115px -472px; }
+.state-flag-vermont { background-position: -220px -472px; }
+.state-flag-delaware { background-position: -325px -472px; }
+.state-flag-maine { background-position: -430px -472px; }
+.state-flag-oklahoma { background-position: -535px -472px; }
+.state-flag-wyoming { background-position: -10px -549px; }
+.state-flag-new-mexico { background-position: -115px -549px; }
+.state-flag-ohio { background-position: -220px -549px; }
+.state-flag-texas { background-position: -325px -549px; }
+.state-flag-rhode-island { background-position: -430px -549px; }
+.state-flag-west-virginia { background-position: -535px -549px; }
+.state-flag-washington { background-position: -640px -10px; }
+.state-flag-utah { background-position: -640px -87px; }
+.state-flag-virginia { background-position: -640px -164px; }
+
+.aig-icon:before { content: ''; background-image: url("../images/icons.png"); display: inline-block; margin-right: 1rem; vertical-align: middle; }
+.aig-icon-web:before { width: 20px; height: 20px; background-position: -47px -10px; }
+.aig-icon-phone:before { width: 20px; height: 18px; background-position: -87px -10px; }
+.aig-icon-address:before { width: 20px; height: 24px; background-position: -9px -10px; }
+
+/*        Errors        */
+.locations-error { text-align: center; color: #ff0000; }
+
+/*        List Title        */
+.locations-listing { display: flex; flex-direction: column; font-family: 'Open Sans'; color: #333333; width: 100%; position: relative; }
+.locations-listing .location-title { background-image: url("../images/title-background-3.png"); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 4px; display: flex; flex-direction: row; margin-top: 1rem; align-items: center; }
+.locations-listing .location-title .state-flag { overflow: hidden; zoom: 0.6; -moz-transform: scale(0.6); -moz-transform-origin: 0 0; }
+.locations-listing .location-title h2 { color: #ffffff; font-size: 1.5rem; margin: 0; padding: 0; margin-left: 1rem; font-weight: 400; }
+.locations-listing .location-title .location-logo { background-image: url("../images/logo.png"); background-position: center; background-repeat: no-repeat; background-size: contain; width: 70px; height: 70px; position: absolute; right: 1.5rem; top: 0.3rem; }
+
+@media screen and (max-width: 400px) { .locations-listing .location-title .location-logo { display: none; } }
+/*        List Item        */
+.locations-listing .locations { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+.locations-listing .locations .location-item { border: 1px solid #dcdcdc; border-radius: 1px; margin: 1rem 0 0; padding: 30px; color: #1f1f1f; flex: 1 1 48%; }
+.locations-listing .locations .location-item:nth-child(2n) { margin-left: 1%; }
+.locations-listing .locations .location-item a { color: #2d97c9; text-decoration: none; box-shadow: unset; }
+.locations-listing .locations .location-item .business-info { margin: 0.8rem 0; color: #575757; }
+.locations-listing .locations .location-item .business-info p { display: inline-block; }
+.locations-listing .locations .location-item .business-info p.address { display: block; }
+.locations-listing .locations .location-item .business-info p.phone a { color: #575757; }
+.locations-listing .locations .location-item .business-info p.site { margin-left: 2rem; }
+.locations-listing .locations .location-item p { font-weight: normal; font-size: 1rem; margin: 0; padding: 0; }
+.locations-listing .locations .location-item h3 { font-weight: bold; font-size: 1.5rem; margin: 0; padding: 0; }
+.locations-listing .locations .location-item h3 a { color: #333333; }
+.locations-listing .locations .location-item h4 { font-weight: bold; font-size: 1.2rem; margin: 0; padding: 0; }
+
+@media screen and (max-width: 700px) { .locations-listing .locations .location-item { flex: 1 1 100%; } }
+/*        Areas Popup        */
+.locations-modal { font-family: 'Open Sans'; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transform: scale(1.1); transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; }
+.locations-modal.show-modal { opacity: 1; visibility: visible; transform: scale(1); transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; }
+.locations-modal .locations-modal-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 1px; padding: 3rem 5rem; width: 50%; }
+.locations-modal h3, .locations-modal h4, .locations-modal p { margin: 0; padding: 0; }
+.locations-modal a { color: #2d97c9; }
+.locations-modal a p { padding-top: 1rem; }
+.locations-modal p { font-weight: normal; font-size: 1rem; margin: 0; padding: 0; }
+.locations-modal h3 { font-weight: bold; font-size: 1.5rem; margin: 0; padding: 0; padding-bottom: 1rem; }
+.locations-modal h4 { font-weight: bold; font-size: 1.2rem; margin: 0; padding: 0; }
+
+@media screen and (max-width: 1200px) { .locations-modal .locations-modal-content { width: 60%; } }
+@media screen and (max-width: 700px) { .locations-modal .locations-modal-content { padding: 3rem; width: 80%; } }
+@media screen and (max-width: 400px) { .locations-modal .locations-modal-content { padding: 3rem 2rem; width: 90%; } }
+
+/*# sourceMappingURL=main.css.map */

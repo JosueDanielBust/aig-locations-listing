@@ -1,0 +1,15 @@
+.aig-metadata-groups {
+    display: flex;
+    flex-direction: column;
+    padding: 0 3rem;
+    .aig-control-group {
+        display: flex;
+        margin: 0.5rem 0;
+        label {
+            min-width: 20%;
+        }
+        select, input[type="text"] {
+            flex-grow: 1;
+        }
+    }
+}

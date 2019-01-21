@@ -1,0 +1,10 @@
+- Plugin Name:  AIG - Locations Listing
+- Plugin URI:   https://github.com/JosueDanielBust/aig-locations-listing
+- Description:  Create Location listing with Store Locator data
+- Version:      1.0
+- Author:       Josue Daniel Bustamante
+- Author URI:   http://josuedanielbust.com/
+- License:      MIT
+- License URI:  https://github.com/JosueDanielBust/aig-locations-listing/blob/master/LICENSE.md
+- Text Domain:  aig-locations-listing
+- Domain Path:  /languages
