@@ -3,13 +3,13 @@ defined( 'ABSPATH' ) or die( '404 - Not found!' );
 
 /*
 Plugin Name:  AIG - Locations Listing
-Plugin URI:   https://github.com/JosueDanielBust/aig-locations-listing
+Plugin URI:   https://github.com/adviceinteractivegroup/restoration1_locations_wpplugin
 Description:  Create Locations listing with Store Locator data via Rest API
 Version:      1.0
 Author:       Josue Daniel Bustamante
 Author URI:   http://josuedanielbust.com/
 License:      MIT
-License URI:  https://github.com/JosueDanielBust/aig-locations-listing/blob/master/LICENSE.md
+License URI:  https://github.com/adviceinteractivegroup/restoration1_locations_wpplugin/blob/master/LICENSE.md
 Text Domain:  aig-locations-listing
 Domain Path:  /languages
 */
