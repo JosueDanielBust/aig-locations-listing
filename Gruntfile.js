@@ -19,7 +19,7 @@ module.exports =  function(grunt) {
 		watch: {
 			copy: {
 				files: ['*.*', 'css/*.css', 'js/*.js'],
-				tasks: ['copy:main'],
+				tasks: ['copy:dist'],
 				options: {
 					event: ['all'],
 					dateFormat: function(time) {

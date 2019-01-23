@@ -3,13 +3,13 @@ defined( 'ABSPATH' ) or die( '404 - Not found!' );
 
 /*
 Plugin Name:  AIG - Locations Listing
-Plugin URI:   https://github.com/JosueDanielBust/aig-locations-listing
+Plugin URI:   https://github.com/adviceinteractivegroup/restoration1_locations_wpplugin
 Description:  Create Locations listing with Store Locator data via Rest API
 Version:      1.0
 Author:       Josue Daniel Bustamante
 Author URI:   http://josuedanielbust.com/
 License:      MIT
-License URI:  https://github.com/JosueDanielBust/aig-locations-listing/blob/master/LICENSE.md
+License URI:  https://github.com/adviceinteractivegroup/restoration1_locations_wpplugin/blob/master/LICENSE.md
 Text Domain:  aig-locations-listing
 Domain Path:  /languages
 */
@@ -30,7 +30,7 @@ function create_aig_location_post_type() {
         'labels' => array(
             'name'                  =>  __( 'Locations' ),
             'singular_name'         =>  __( 'Location' ),
-            'menu_name'             =>  __( 'Locations' ),
+            'menu_name'             =>  __( 'Store Locator' ),
             'name_admin_bar'        =>  __( 'Locations'),
             'add_new'               =>  __( 'Add New', 'location' ),
             'add_new_item'          =>  __( 'Add new Location' ),
@@ -43,11 +43,12 @@ function create_aig_location_post_type() {
             'not_found'             =>  __( 'No location found.' ),
             'not_found_in_trash'    =>  __( 'No location found in trash.' )
         ),
-        'public'        =>  true,
-        'has_archive'   =>  true,
-        'show_in_rest'  =>  true,
-        'rewrite'       =>  true,
+        'public'        =>  false,
+        'show_in_rest'  =>  false,
         'hierarchical'  =>  false,
+        'has_archive'   =>  false,
+        'rewrite'       =>  true,
+        'show_ui'       =>  true,
         'rest_base'     =>  'location',
         'menu_icon'     =>  'dashicons-location-alt',
         'rewrite'       =>  array('slug' => 'location'),
@@ -61,7 +62,8 @@ function create_aig_location_taxonomy() {
         'locations',
         'location',
         array(
-            'public'            =>  true,
+            'public'            =>  false,
+            'show_ui'           =>  true,
             'hierarchical'      =>  true,
             'label'             =>  __( 'States' ),
         )
@@ -87,21 +89,19 @@ function aig_location_options(){
     $custom         =   get_post_custom( $post->ID );
     $parent_lp      =   $custom[ 'aig_parent_landing_page' ][0];
     $parent_pc      =   $custom[ 'aig_parent_postal_code' ][0];
-    $parent_ew      =   $custom[ 'aig_parent_external_web' ][0];
 
     ?>
     <div class="aig-metadata-groups">
         <div class="aig-control-group">
             <label for="aig_parent_landing_page">Location Landing Page</label>
             <?php
-                if ( strlen( $parent_lp ) < 1 ) { $parent_lp = 0; }
                 $args = array(
                     'depth'                 =>  1,
                     'selected'              =>  $parent_lp,
                     'echo'                  =>  1,
                     'name'                  =>  'aig_parent_landing_page',
                     'id'                    =>  'aig_parent_landing_page',
-                    'value_field'           =>  'aig_parent_landing_page',
+                    'value_field'           =>  'ID',
                 );
                 wp_dropdown_pages( $args );
             ?>
@@ -109,10 +109,6 @@ function aig_location_options(){
         <div class="aig-control-group">
             <label for="aig_parent_postal_code">Parent Postal Code</label>
             <input type="text" name="aig_parent_postal_code" id="aig_parent_postal_code" value="<?php echo $parent_pc; ?>" />
-        </div>
-        <div class="aig-control-group">
-            <label for="aig_parent_external_web">Parent External Web</label>
-            <input type="text" name="aig_parent_external_web" id="aig_parent_external_web" value="<?php echo $parent_ew; ?>" />
         </div>
     </div>
     <?php
@@ -122,7 +118,6 @@ function aig_save_metadata(){
     global $post;
     update_post_meta( $post->ID, 'aig_parent_postal_code', $_POST[ 'aig_parent_postal_code' ] );
     update_post_meta( $post->ID, 'aig_parent_landing_page', $_POST[ 'aig_parent_landing_page' ] );
-    update_post_meta( $post->ID, 'aig_parent_external_web', $_POST[ 'aig_parent_external_web' ] );
 }
 #endregion
 
@@ -243,11 +238,12 @@ function aig_listing_generator( $category, $slug ) {
             <div class="locations">
                 <?php
                 while ( $the_query->have_posts() ) : $the_query->the_post();
-                    $custom = get_post_custom( get_the_ID() );
-                    $cp = $custom[ 'aig_parent_postal_code' ][0];
-                    $location_name = $data[ $cp ]['Name'];
-                    $location_addresses = $data[ $cp ]['Addresses'];
-                    $areas = $data[ $cp ]['Cities'];
+                    $custom             =   get_post_custom( get_the_ID() );
+                    $cp                 =   $custom[ 'aig_parent_postal_code' ][0];
+                    $areas              =   $data[ $cp ]['Cities'];
+                    $status             =   $data[ $cp ]['status'];
+                    $location_name      =   $data[ $cp ]['Name'];
+                    $location_addresses =   $data[ $cp ]['Addresses'];
 
                     $cities = '';
                     foreach ($areas as $key => $city) { $cities .= $city . ', '; }
@@ -255,39 +251,48 @@ function aig_listing_generator( $category, $slug ) {
 
                     ?>
                     <div class="location-item">
-                        <h3>
-                            <a href="<?php echo get_page_link( $custom[ 'aig_parent_landing_page' ][0])  ?>"><?php echo $location_name ?></a>
-                        </h3>
-                        <div class="business-info">
-                            <?php foreach ($location_addresses as $address) { ?>
-                                <p class="aig-icon address aig-icon-address"><?php echo $address['Address'] ?></p>
-                                <p class="aig-icon phone aig-icon-phone">
-                                    <a href="tel:<?php echo $address['Phone'] ?>"><?php echo format_number($address['Phone']) ?></a>
-                                </p>
-                            <?php } ?>
-                            <?php if ( $custom[ 'aig_parent_external_web' ][0] ) { ?>
-                                <p class="aig-icon site aig-icon-web">
-                                    <a href="<?php echo get_page_link( $custom[ 'aig_parent_external_web' ][0]) ?>">Visit Website</a>
-                                </p>
-                            <?php } ?>
-                        </div>
-                        <div class="service-info">
-                            <h4>Common Areas Serviced</h4>
-                            <div>
-                                <?php if( sizeof( $areas ) > 5 ) {
-                                    $first_cities = '';
-                                    for ($i = 0; $i <= 4; $i++) { $first_cities .= $areas[$i] . ', '; }
-                                    $first_cities = capitalize( substr($first_cities, 0, -2) );
-                                ?>
-                                    <p>
-                                        <?php echo $first_cities ?>...
-                                        <a href="#modal" onclick="toggle_modal(this)" l-name="<?php echo $location_name ?>" l-areas="<?php echo $cities ?>">Click here for more</a>
+                        <?php if ( $status != '404' ) { ?>
+                            <h3>
+                                <a href="<?php echo get_page_link( $custom[ 'aig_parent_landing_page' ][0] )  ?>"><?php echo $location_name ?></a>
+                            </h3>
+                            <div class="business-info">
+                                <?php foreach ($location_addresses as $address) { 
+                                    if ( $address['Address'] != ', ,  ' || $address['Phone'] != '' ) { ?>
+                                        <p class="aig-icon address aig-icon-address"><?php echo $address['Address'] ?></p>
+                                        <p class="aig-icon phone aig-icon-phone">
+                                            <a href="tel:<?php echo $address['Phone'] ?>"><?php echo format_number($address['Phone']) ?></a>
+                                        </p>
+                                <?php }
+                                }
+                                $website = get_post_meta( $custom[ 'aig_parent_landing_page' ][0], 'cmb_home_location_website', true );
+                                if ( $website ) { ?>
+                                    <p class="aig-icon site aig-icon-web">
+                                        <a href="<?php echo $website; ?>">Visit Website</a>
                                     </p>
-                                <?php } else { ?>
-                                    <p><?php echo $cities ?></p>
                                 <?php } ?>
                             </div>
-                        </div>
+                            <div class="service-info">
+                                <h4>Common Areas Serviced</h4>
+                                <div>
+                                    <?php if( sizeof( $areas ) > 5 ) {
+                                        $first_cities = '';
+                                        for ($i = 0; $i <= 4; $i++) { $first_cities .= $areas[$i] . ', '; }
+                                        $first_cities = capitalize( substr($first_cities, 0, -2) );
+                                    ?>
+                                        <p>
+                                            <?php echo $first_cities ?>...
+                                            <a href="#modal" onclick="toggle_modal(this)" l-name="<?php echo $location_name ?>" l-areas="<?php echo $cities ?>">Click here for more</a>
+                                        </p>
+                                    <?php } else { ?>
+                                        <p><?php echo $cities ?></p>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <h4 class="locations-error" data="<?php echo get_page_link( $custom[ 'aig_parent_landing_page' ][0] )  ?>">
+                                We're sorry, Is not possible to retrieve this information right now.
+                            </h4>
+                        <?php } ?>
                     </div>
                 <?php endwhile;
                 wp_reset_postdata(); ?>
