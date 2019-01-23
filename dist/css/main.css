@@ -51,38 +51,50 @@
 .state-flag-utah { background-position: -640px -87px; }
 .state-flag-virginia { background-position: -640px -164px; }
 
-.aig-icon:before { content: ''; background-image: url("../images/icons.png"); display: inline-block; margin-right: 1rem; vertical-align: middle; }
-.aig-icon-web:before { width: 20px; height: 20px; background-position: -47px -10px; }
-.aig-icon-phone:before { width: 20px; height: 18px; background-position: -87px -10px; }
+.aig-icon { position: relative; padding-left: 25px; margin-bottom: 10px; }
+.aig-icon:before { content: ''; background-image: url("../images/icons.png"); display: inline-block; vertical-align: middle; position: absolute; left: 0; top: 0; }
+.aig-icon-web:before { width: 20px; height: 20px; background-position: -47px -10px; top: 2px; }
+.aig-icon-phone:before { width: 20px; height: 18px; background-position: -87px -10px; top: 2px; }
 .aig-icon-address:before { width: 20px; height: 24px; background-position: -9px -10px; }
 
+@media (min-width: 992px) { .aig-icon-address { clear: both; }
+  .aig-icon-web { display: inline-block; margin-left: 15px; }
+  .aig-icon-phone { display: inline-block; }
+  .service-info { clear: both; } }
 /*        Errors        */
 .locations-error { text-align: center; color: #ff0000; }
 
 /*        List Title        */
 .locations-listing { display: flex; flex-direction: column; font-family: 'Open Sans'; color: #333333; width: 100%; position: relative; }
-.locations-listing .location-title { background-image: url("../images/title-background-3.png"); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 4px; display: flex; flex-direction: row; margin-top: 1rem; align-items: center; }
-.locations-listing .location-title .state-flag { overflow: hidden; zoom: 0.6; -moz-transform: scale(0.6); -moz-transform-origin: 0 0; }
-.locations-listing .location-title h2 { color: #ffffff; font-size: 1.5rem; margin: 0; padding: 0; margin-left: 1rem; font-weight: 400; }
-.locations-listing .location-title .location-logo { background-image: url("../images/logo.png"); background-position: center; background-repeat: no-repeat; background-size: contain; width: 70px; height: 70px; position: absolute; right: 1.5rem; top: 0.3rem; }
+.locations-listing .location-title { background-image: url("../images/title-background-3.png"); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 4px; margin-top: 1rem; position: relative; }
+.locations-listing .location-title .state-flag { overflow: hidden; zoom: 0.6; -moz-transform: scale(0.6); -moz-transform-origin: 0 0; position: absolute; left: 5px; top: 5px; }
+.locations-listing .location-title h2 { color: #ffffff; font-size: 1.5rem; margin: 0; padding: 5px 5px 5px 50px; margin-left: 1rem; }
+.locations-listing .location-title .location-logo { background-image: url("../images/logo.png"); background-position: center; background-repeat: no-repeat; background-size: contain; width: 70px; height: 70px; position: absolute; right: 1.5rem; top: -0.5rem; display: none; }
 
-@media screen and (max-width: 400px) { .locations-listing .location-title .location-logo { display: none; } }
 /*        List Item        */
 .locations-listing .locations { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
-.locations-listing .locations .location-item { border: 1px solid #dcdcdc; border-radius: 1px; margin: 1rem 0 0; padding: 30px; color: #1f1f1f; flex: 1 1 48%; }
+.locations-listing .locations .location-item { border: 1px solid #dcdcdc; border-radius: 1px; margin: 1rem 0 0; padding: 15px; color: #1f1f1f; flex: 1 1 48%; }
 .locations-listing .locations .location-item:nth-child(2n) { margin-left: 1%; }
 .locations-listing .locations .location-item a { color: #2d97c9; text-decoration: none; box-shadow: unset; }
 .locations-listing .locations .location-item .business-info { margin: 0.8rem 0; color: #575757; }
-.locations-listing .locations .location-item .business-info p { display: inline-block; }
 .locations-listing .locations .location-item .business-info p.address { display: block; }
 .locations-listing .locations .location-item .business-info p.phone a { color: #575757; }
-.locations-listing .locations .location-item .business-info p.site { margin-left: 2rem; }
-.locations-listing .locations .location-item p { font-weight: normal; font-size: 1rem; margin: 0; padding: 0; }
-.locations-listing .locations .location-item h3 { font-weight: bold; font-size: 1.5rem; margin: 0; padding: 0; }
+.locations-listing .locations .location-item p { font-weight: normal; font-size: 0.9rem; }
+.locations-listing .locations .location-item h3 { font-weight: bold; font-size: 1.5rem; font-size: 1.2rem; margin: 0; padding: 0; }
 .locations-listing .locations .location-item h3 a { color: #333333; }
-.locations-listing .locations .location-item h4 { font-weight: bold; font-size: 1.2rem; margin: 0; padding: 0; }
+.locations-listing .locations .location-item h4 { font-weight: bold; font-size: 1.1rem; margin: 0; padding: 0; }
 
 @media screen and (max-width: 700px) { .locations-listing .locations .location-item { flex: 1 1 100%; } }
+@media (min-width: 992px) { .locations-listing .location-title .location-logo { display: block !important; }
+  .locations-listing .location-title .state-flag { overflow: hidden; zoom: 1; -moz-transform: scale(1); -moz-transform-origin: 0 0; position: absolute; left: 5px; top: 5px; }
+  .locations-listing .location-title h2 { font-size: 2rem; padding: 10px 15px 11px 90px; font-weight: 500; }
+  .locations-listing .location-title .location-logo { background-image: url("../images/logo.png"); background-position: center; background-repeat: no-repeat; background-size: contain; width: 70px; height: 70px; position: absolute; right: 1.5rem; top: 0.3rem; display: none; }
+  .locations-listing .locations .location-item { padding: 30px 30px 15px 30px; }
+  .locations-listing .locations .location-item .business-info p.address { display: block; }
+  .locations-listing .locations .location-item p { font-size: 1rem; }
+  .locations-listing .locations .location-item h3 { font-size: 1.5rem; }
+  .locations-listing .locations .location-item h4 { font-size: 1.2rem; margin-bottom: 4px; }
+  .locations-listing .locations .location-item .service-info p { font-size: 0.92rem; } }
 /*        Areas Popup        */
 .locations-modal { font-family: 'Open Sans'; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transform: scale(1.1); transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; }
 .locations-modal.show-modal { opacity: 1; visibility: visible; transform: scale(1); transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; }
