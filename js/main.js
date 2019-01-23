@@ -27,4 +27,4 @@ function filter_state() {
         elements.forEach(function(e) { e.style.display = 'flex'; });
     }
 }
-stateFilter.addEventListener('change', filter_state);
+if ( !!stateFilter ) { stateFilter.addEventListener('change', filter_state); }
