@@ -289,7 +289,7 @@ function aig_listing_generator( $category, $slug ) {
                                 </div>
                             </div>
                         <?php } else { ?>
-                            <h4 class="locations-error" data="<?php echo get_page_link( $custom[ 'aig_parent_landing_page' ][0] )  ?>">
+                            <h4 class="locations-error" data="<?php echo get_post_field( 'post_name', $custom[ 'aig_parent_landing_page' ][0] );  ?>">
                                 We're sorry, Is not possible to retrieve this information right now.
                             </h4>
                         <?php } ?>
