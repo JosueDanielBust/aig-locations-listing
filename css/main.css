@@ -62,7 +62,9 @@
   .aig-icon-phone { display: inline-block; }
   .service-info { clear: both; } }
 /*        Errors        */
-.locations-error { text-align: center; color: #ff0000; }
+.locations-error { text-align: center; }
+.locations-error h4 { font-size: 1.5rem; color: #ff0000; }
+.locations-error p { font-size: 1rem; color: #ff0000; }
 
 /*        List Title        */
 .locations-listing { display: flex; flex-direction: column; font-family: 'Open Sans'; color: #333333; width: 100%; position: relative; }

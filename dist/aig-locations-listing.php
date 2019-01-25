@@ -249,9 +249,9 @@ function aig_listing_generator( $category, $slug ) {
                     foreach ($areas as $key => $city) { $cities .= $city . ', '; }
                     $cities = capitalize( substr($cities, 0, -2) );
 
-                    ?>
-                    <div class="location-item">
-                        <?php if ( $status != '404' ) { ?>
+                    if ( $status != '404' ) {
+                        ?>
+                        <div class="location-item">
                             <h3>
                                 <a href="<?php echo get_page_link( $custom[ 'aig_parent_landing_page' ][0] )  ?>"><?php echo $location_name ?></a>
                             </h3>
@@ -288,13 +288,16 @@ function aig_listing_generator( $category, $slug ) {
                                     <?php } ?>
                                 </div>
                             </div>
-                        <?php } else { ?>
-                            <h4 class="locations-error" data="<?php echo get_post_field( 'post_name', $custom[ 'aig_parent_landing_page' ][0] );  ?>">
-                                We're sorry, Is not possible to retrieve this information right now.
-                            </h4>
-                        <?php } ?>
-                    </div>
-                <?php endwhile;
+                        </div>
+                    <?php } else {
+                        if( current_user_can('editor') || current_user_can('administrator') ) {
+                            $post_name  =   get_post_field( 'post_name', $custom[ 'aig_parent_landing_page' ][0] );
+                            $output     =   '<div class="location-item locations-error"><h4 data="' . $post_name . '">';
+                            $output    .=   get_the_title() . ' location not found</h4><p>As administrator please review zipcode on Store Locator plugin</p></div>';
+                            echo $output;
+                        }
+                    }
+                endwhile;
                 wp_reset_postdata(); ?>
             </div>
         </div>
