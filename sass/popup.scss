@@ -16,6 +16,7 @@
         visibility: visible;
         transform: scale(1.0);
         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+        z-index: 1000;
     }
     .locations-modal-content {
         position: absolute;
@@ -27,6 +28,8 @@
         border-radius: 1px;
         padding: 3rem 5rem;
         width: 50%;
+        max-height: 80vh;
+        overflow: scroll;
     }
     h3, h4, p {
         margin: 0;

@@ -179,7 +179,7 @@ add_action( 'wp_enqueue_scripts', 'aig_locations_custom_scripts' );
 #region Utils
 //      Get Data from Store Locator API
 function get_api_data( $zips ) {
-    $response = wp_remote_post( $GLOBALS['endpoint'], array( 'headers' => array( 'AccessToken' => $GLOBALS['token'], 'Content-Type' => 'application/json'), 'body' => $zips ) );
+    $response = wp_remote_post( $GLOBALS['endpoint'], array( 'headers' => array( 'AccessToken' => $GLOBALS['token'], 'Content-Type' => 'application/json', 'Cache-Control' => 'public, max-age=86400'), 'body' => $zips ) );
     $body = $response['body'];
     $jsondata = json_decode($body, true);
     if ( $jsondata['overallStatusCode'] == 200 ) { return $jsondata['result']; } else { return '404'; }
@@ -195,7 +195,7 @@ function capitalize( $string ) {
 #region Register_Shortcodes
 //      Register shortcodes
 //      [locations category="category" slug="category-slug"]
-function aig_listing_generator( $category, $slug ) {
+function aig_listing_zips( $category, $slug ) {
     $args = array(
         'post_type'     =>  'location',
         'orderby'       =>  'title',
@@ -212,15 +212,32 @@ function aig_listing_generator( $category, $slug ) {
     $the_query = new WP_Query( $args );
 
     if ( $the_query->have_posts() ) {
-
-        // Getting custom zips from plugin and calling API Query
-        $zips = '{"zipscodes":[';
+        // Getting custom zips from plugin
+        $zips = '';
         while ( $the_query->have_posts() ) : $the_query->the_post();
             $custom = get_post_custom( get_the_ID() );
             $zips  .= '"' . $custom[ 'aig_parent_postal_code' ][0] . '",';
         endwhile;
-        $zips = substr($zips, 0, -1) . ']}';
-        $data = get_api_data( $zips );
+        return $zips;
+    }
+}
+function aig_listing_generator( $category, $slug, $data) {
+    $args = array(
+        'post_type'     =>  'location',
+        'orderby'       =>  'title',
+        'order'         =>  'ASC',
+        'nopaging'      =>  'true',
+        'tax_query'     =>  array(
+            array(
+                'taxonomy'  =>  'locations',
+                'field'     =>  'slug',
+                'terms'     =>  $category,
+            ),
+        ),
+    );
+    $the_query = new WP_Query( $args );
+
+    if ( $the_query->have_posts() ) {
 
         if ( $data == '404' ) {
             ?><h4 class="locations-error"><?php echo $GLOBALS['error'] ?></h4><?php
@@ -272,7 +289,7 @@ function aig_listing_generator( $category, $slug ) {
                                 <?php } ?>
                             </div>
                             <div class="service-info">
-                                <h4>Common Areas Serviced</h4>
+                                <h4>Common Areas Served</h4>
                                 <div>
                                     <?php if( sizeof( $areas ) > 5 ) {
                                         $first_cities = '';
@@ -308,7 +325,7 @@ function aig_listing_modal() {
         <div class="locations-modal">
             <div class="locations-modal-content">
                 <h3></h3>
-                <h4>Common Areas Serviced</h4>
+                <h4>Common Areas Served</h4>
                 <p class="areas"></p>
                 <a href="#modal" onclick="toggle_modal()"><p>Click here for less</p></a>
             </div>
@@ -321,13 +338,27 @@ function locations_listing_shortcode( $atts ) {
         'slug'      =>  ''
     ), $atts );
 
+    // Getting custom zips from plugin and calling API
+    $zips = '{"zipscodes":[';
     if ( $a[ 'category' ] !== 'all' ) {
-        aig_listing_generator( $a[ 'category' ], $a[ 'slug' ] );
+        $zips .= aig_listing_zips( $a[ 'category' ], $a[ 'slug' ] );
     } else {
         foreach ($GLOBALS['states'] as $state => $slug) {
-            aig_listing_generator( $state, $slug );
+            $zips .= aig_listing_zips( $state, $slug );
         }
     }
+    $zips = substr($zips, 0, -1) . ']}';
+    $data = get_api_data( $zips );
+
+    // Calling HTML output of the list by categories
+    if ( $a[ 'category' ] !== 'all' ) {
+        aig_listing_generator( $a[ 'category' ], $a[ 'slug' ], $data );
+    } else {
+        foreach ($GLOBALS['states'] as $state => $slug) {
+            aig_listing_generator( $state, $slug, $data );
+        }
+    }
+
     aig_listing_modal();
 };
 
