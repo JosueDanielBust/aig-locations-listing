@@ -179,7 +179,7 @@ add_action( 'wp_enqueue_scripts', 'aig_locations_custom_scripts' );
 #region Utils
 //      Get Data from Store Locator API
 function get_api_data( $zips ) {
-    $response = wp_remote_post( $GLOBALS['endpoint'], array( 'headers' => array( 'AccessToken' => $GLOBALS['token'], 'Content-Type' => 'application/json', 'Cache-Control' => 'public, max-age=86400'), 'body' => $zips ) );
+    $response = wp_remote_post( $GLOBALS['endpoint'], array( 'timeout' => 13000, 'headers' => array( 'AccessToken' => $GLOBALS['token'], 'Content-Type' => 'application/json', 'Cache-Control' => 'public, max-age=86400'), 'body' => $zips ) );
     $body = $response['body'];
     $jsondata = json_decode($body, true);
     if ( $jsondata['overallStatusCode'] == 200 ) { return $jsondata['result']; } else { return '404'; }
